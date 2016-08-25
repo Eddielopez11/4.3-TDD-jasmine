@@ -2,35 +2,40 @@
 var profileHTML = this;
 
 profileHTML.init = function(){
-  profileHTML.replaceHTML();
+  profileHTML.wrapWithinMain();
 }
 
 profileHTML.renderProfileName = function() {
-  return `<h2 data-js="name"></h2>`;
+  return `<h2 data-js="name" class="name"></h2>`;
 };
 
 profileHTML.renderProfileEmail = function() {
-  return `<h3 data-js="email"></h3>`
+  return `<h3 data-js="email" class="email"></h3>`
 };
 
 profileHTML.renderProfileBlog = function() {
-  return `<h3 data-js="blog"></h3>`
+  return `<h3 data-js="blog" class="blog"></h3>`
 };
 
 profileHTML.renderProfileLocation = function() {
-  return `<h3 data-js="location"></h3>`
+  return `<h3 data-js="location" class="location"></h3>`
 };
 
 profileHTML.renderProfileURL = function() {
-  return `<h3 data-js="userURL"></h3>`
+  return `<h3 data-js="userURL" class="userURL"></h3>`
 };
 
 profileHTML.renderProfileAvatar = function() {
-  return `<img data-js="avatarURL" src="" alt=""/>`
+  return `<img data-js="avatarURL" class="avatar" src="" alt=""/>`
 };
 
-profileHTML.replaceHTML = function() {
-  document.write(profileHTML.renderProfileAvatar() + profileHTML.renderProfileName() + profileHTML.renderProfileLocation() + profileHTML.renderProfileURL() + profileHTML.renderProfileEmail() + profileHTML.renderProfileBlog())
+profileHTML.combineHTML =
+  profileHTML.renderProfileAvatar() + profileHTML.renderProfileName()
+  + profileHTML.renderProfileLocation() + profileHTML.renderProfileURL()
+  + profileHTML.renderProfileEmail() + profileHTML.renderProfileBlog();
+
+profileHTML.wrapWithinMain = function() {
+  document.write(`<main class="main">${profileHTML.combineHTML}</main>`);
 };
 
 },{}],2:[function(require,module,exports){
@@ -62,9 +67,7 @@ profile.init = function(){
 
   profile.requestProfile.addEventListener('load', function(e) {
     profile.profileJSON = JSON.parse(e.target.response);
-    console.log(profile.profileJSON);
     profile.gitName.textContent = profile.profileJSON.name;
-    console.log(profile.gitName.textContent);
     profile.blog.textContent = profile.profileJSON.blog;
     profile.location.textContent = profile.profileJSON.location;
     profile.email.textContent = profile.profileJSON.email;
