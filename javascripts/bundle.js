@@ -35,7 +35,7 @@ profileHTML.combineHTML =
   + profileHTML.renderProfileEmail() + profileHTML.renderProfileBlog();
 
 profileHTML.wrapWithinMain = function() {
-  document.write(`<main class="main">${profileHTML.combineHTML}</main>`);
+  document.write(`<main>${profileHTML.combineHTML}</main>`);
 };
 
 },{}],2:[function(require,module,exports){
